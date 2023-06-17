@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +32,21 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<dynamic> _searchResults = [];
+
+  void _searchRepositories(String keyword) async {
+    String apiUrl = 'https://api.github.com/search/repositories?q=$keyword';
+
+    http.Response response = await http.get(Uri.parse(apiUrl));
+    if (response.statusCode == 200) {
+      setState(() {
+        _searchResults = json.decode(response.body)['items'];
+      });
+    } else {
+      print('検索エラー: ${response.statusCode}');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
