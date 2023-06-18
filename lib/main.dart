@@ -32,6 +32,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final TextEditingController _searchController = TextEditingController();
   List<dynamic> _searchResults = [];
 
   void _searchRepositories(String keyword) async {
@@ -63,8 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration: BoxDecoration(
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(30.0)),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: _searchController,
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'enter text',
                     prefixIcon: Icon(Icons.search),
@@ -72,6 +74,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+            ElevatedButton(
+              onPressed: () {
+                String keyword = _searchController.text;
+                _searchRepositories(keyword);
+              },
+              child: Text('検索'),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _searchResults.length,
+                itemBuilder: (context, index) {
+                  String repositoryName = _searchResults[index]['name'];
+                  return ListTile(
+                    title: Text(repositoryName),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),
