@@ -48,12 +48,21 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  AppBar buildAppBar() {
+    return AppBar(
+      title: Image.asset(
+        'assets/GitHub-Logo.png',
+        width: 80,
+        ),
+      backgroundColor: Colors.transparent,
+      elevation: 0.0, // 影
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: buildAppBar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
