@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
       title: Image.asset(
         'assets/GitHub-Logo.png',
         width: 80,
-        ),
+      ),
       backgroundColor: Colors.transparent,
       elevation: 0.0, // 影
     );
@@ -73,22 +73,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 decoration: BoxDecoration(
                     color: Colors.grey,
                     borderRadius: BorderRadius.circular(30.0)),
-                child: TextField(
-                  controller: _searchController,
+                child: TextFormField(
                   decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'enter text',
                     prefixIcon: Icon(Icons.search),
                   ),
+                  onFieldSubmitted: (String value) { // Stringじゃない場合の処理要るかも
+                    _searchRepositories(value);
+                  },
                 ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                String keyword = _searchController.text;
-                _searchRepositories(keyword);
-              },
-              child: Text('検索'),
             ),
             Expanded(
               child: ListView.builder(
