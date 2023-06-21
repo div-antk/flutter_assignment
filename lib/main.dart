@@ -32,7 +32,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _searchController = TextEditingController();
   List<dynamic> _searchResults = [];
 
   void _searchRepositories(String keyword) async {
@@ -85,6 +84,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+            const Divider(
+              thickness: 0.8,
+              indent: 16,
+              endIndent: 16,
+            ),
             Expanded(
               child: ListView.builder(
                 itemCount: _searchResults.length,
@@ -95,7 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
       ),
