@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -78,7 +79,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     hintText: 'enter text',
                     prefixIcon: Icon(Icons.search),
                   ),
-                  onFieldSubmitted: (String value) { // Stringじゃない場合の処理要るかも
+                  onFieldSubmitted: (String value) {
+                    // Stringじゃない場合の処理要るかも
                     _searchRepositories(value);
                   },
                 ),
@@ -93,9 +95,21 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListView.builder(
                 itemCount: _searchResults.length,
                 itemBuilder: (context, index) {
+                  String userName = _searchResults[index]['owner']['login'];
                   String repositoryName = _searchResults[index]['name'];
+                  String desctiption = _searchResults[index]['description'] ?? '';
+                  String language = _searchResults[index]['language'] ?? '';
+                  int stars = _searchResults[index]['stargazers_count'] ?? 0; 
                   return ListTile(
-                    title: Text(repositoryName),
+                    title: Text('$userName/$repositoryName'),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(desctiption),
+                        Text(language),
+                        Text(stars.toString()),
+                      ]
+                    ),
                   );
                 },
               ),
