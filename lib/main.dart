@@ -75,13 +75,47 @@ class _MyHomePageState extends State<MyHomePage> {
         String language = _searchResults[index]['language'] ?? '';
         int stars = _searchResults[index]['stargazers_count'] ?? 0;
         return ListTile(
-          title: Text('$userName/$repositoryName'),
-          subtitle:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(desctiption),
-            Text(language),
-            Text(stars.toString()),
-          ]),
+          title: Text(
+            '$userName/$repositoryName',
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 4,
+              ),
+              Text(
+                desctiption,
+                style: const TextStyle(fontSize: 12),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Row(
+                children: [
+                  Text(
+                    '🌐$language',
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    '⭐️$stars',
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+              const Divider(
+                thickness: 0.8,
+              ),
+            ],
+          ),
         );
       },
     );
