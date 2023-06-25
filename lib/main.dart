@@ -34,13 +34,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<dynamic> _searchResults = [];
+  int _searchCount = 0;
 
   Future<List<dynamic>> _fetchRepositories(String keyword) async {
     String apiUrl = 'https://api.github.com/search/repositories?q=$keyword';
 
     http.Response response = await http.get(Uri.parse(apiUrl));
     if (response.statusCode == 200) {
-      return _searchResults = json.decode(response.body)['items'];
+      var data = json.decode(response.body);
+      _searchCount = data['total_count'] ?? 0;
+      return _searchResults = data['items'];
     } else {
       print('検索エラー: ${response.statusCode}');
       return [];
@@ -148,6 +151,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 8,
+            ),
+            Text('Total $_searchCount'),
             const Divider(
               thickness: 0.8,
               indent: 16,
