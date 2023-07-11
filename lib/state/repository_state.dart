@@ -4,7 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'repository_state.freezed.dart';
 
 @freezed
-class RepositoryState with _$PokemonState {
+class RepositoryState with _$RepositoryState {
   const factory RepositoryState({
     List<GithubItem>? repositoryList,
   }) = _RepositoryState;
