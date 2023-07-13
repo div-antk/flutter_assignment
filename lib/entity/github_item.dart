@@ -5,15 +5,16 @@ part 'github_item.freezed.dart';
 part 'github_item.g.dart';
 
 @freezed
-class GithubItem with _$GithubItem { 
-  const factory GithubItem ({
+class GithubItem with _$GithubItem {
+  const factory GithubItem({
     required String username,
     required String repositoryName,
     required String description,
-    required String language, 
+    required String language,
     required int stars,
   }) = _GithubItem;
 
   // json形式で受け取るためのコードを生成するために記述
-  factory GithubItem.fromJson(Map<String, dynamic> json) => _$GithubItemFromJson(json);
+  factory GithubItem.fromJson(Map<String, dynamic> json) =>
+      _$GithubItemFromJson(json);
 }
